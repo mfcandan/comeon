@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import MainLayout from "./components/templates/MainLayout/MainLayout";
+import LoginPage from "./components/pages/Login/LoginPage";
+import GamesPage from "./components/pages/Games/GamesPage";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    localStorage.getItem("user") &&
+      setCurrentUser({
+        name: localStorage.getItem("user"),
+      });
+  }, []);
+
+  useEffect(() => {
+    currentUser && localStorage.setItem("user", "fatih");
+  }, [currentUser]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MainLayout>{currentUser ? <GamesPage /> : <LoginPage />}</MainLayout>
+    </>
   );
 }
 
