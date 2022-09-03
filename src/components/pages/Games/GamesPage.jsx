@@ -3,6 +3,7 @@ import { useStore } from "../../../store/store";
 import { useEffect } from "react";
 import GameItem from "../../molecules/GameItem/GameItem";
 import CategoryItem from "../../molecules/CategoryItem/CategoryItem";
+import PlayerItem from "../../molecules/PlayerItem/PlayerItem";
 
 const GamesPage = () => {
   const { user, logout, fetchGames, games, fetchCategories, categories } =
@@ -22,15 +23,7 @@ const GamesPage = () => {
         <div className="ui grid centered">
           <div className="twelve wide column">
             <div className="ui list">
-              <div className="player item">
-                <img className="ui avatar image" src="" alt="avatar" />
-                <div className="content">
-                  <div className="header">
-                    <b className="name"></b>
-                  </div>
-                  <div className="description event"></div>
-                </div>
-              </div>
+              <PlayerItem player={user} />
             </div>
             <div
               onClick={() => handleLogout()}
