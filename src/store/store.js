@@ -24,18 +24,18 @@ export const useStore = create((set, get) => ({
       const data = await res.json();
       if (res.status === 200 && data.player !== null) {
         set(() => ({
-          user: { ...data.player, userName: user },
+          user: { ...data.player, username: user },
         }));
         localStorage.setItem(
           "user",
-          JSON.stringify({ ...data.player, userName: user })
+          JSON.stringify({ ...data.player, username: user })
         );
       }
     } catch (error) {
       console.log("error", error);
     }
   },
-  logout: async (userName) => {
+  logout: async (username) => {
     try {
       const res = await fetch("http://localhost:3001/logout", {
         method: "post",
@@ -44,7 +44,7 @@ export const useStore = create((set, get) => ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName,
+          username,
         }),
       });
       if (res.status === 200) {

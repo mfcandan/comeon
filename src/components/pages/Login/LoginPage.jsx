@@ -4,13 +4,13 @@ import { useState } from "react";
 
 const LoginPage = () => {
   const { login } = useStore();
-  const [userName, setUserName] = useState();
+  const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (userName !== null && password !== null) {
-      login(userName, password);
+    if (username !== null && password !== null) {
+      login(username, password);
     }
   };
 
@@ -24,7 +24,7 @@ const LoginPage = () => {
                 <div className="ui icon input">
                   <input
                     onChange={(e) => setUserName(e.target.value)}
-                    value={userName}
+                    value={username}
                     type="text"
                     name="username"
                     placeholder="Username"

@@ -6,7 +6,7 @@ const GamesPage = () => {
   const { user, logout } = useStore();
 
   const handleLogout = () => {
-    logout(user.userName);
+    logout(user.username);
   };
 
   return (
