@@ -1,9 +1,10 @@
-import "./gamesPage.scss";
-import { useStore } from "../../../store/store";
 import { useEffect } from "react";
+import { useStore } from "../../../store/store";
 import GameItem from "../../molecules/GameItem/GameItem";
-import CategoryItem from "../../molecules/CategoryItem/CategoryItem";
 import PlayerItem from "../../molecules/PlayerItem/PlayerItem";
+import CategoryList from "../../organisms/CategoryList/CategoryList";
+import GameList from "../../organisms/GameList/GameList";
+import "./gamesPage.scss";
 
 const GamesPage = () => {
   const { user, logout, fetchGames, games, fetchCategories, categories } =
@@ -40,22 +41,8 @@ const GamesPage = () => {
           </div>
         </div>
         <div className="ui grid">
-          <div className="twelve wide column">
-            <h3 className="ui dividing header">Games</h3>
-            <div className="ui relaxed divided game items links">
-              {games &&
-                games.map((game) => <GameItem key={game.name} game={game} />)}
-            </div>
-          </div>
-          <div className="four wide column">
-            <h3 className="ui dividing header">Categories</h3>
-            <div className="ui selection animated list category items">
-              {categories &&
-                categories.map((category) => (
-                  <CategoryItem key={category.id} category={category} />
-                ))}
-            </div>
-          </div>
+          <GameList games={games} />
+          <CategoryList categories={categories} />
         </div>
       </div>
     </div>
