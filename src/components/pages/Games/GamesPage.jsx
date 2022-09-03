@@ -1,6 +1,14 @@
 import "./gamesPage.scss";
+import { useStore } from "../../../store/store";
+import { useEffect } from "react";
 
 const GamesPage = () => {
+  const { user, logout } = useStore();
+
+  const handleLogout = () => {
+    logout(user.userName);
+  };
+
   return (
     <div className="gamesPage">
       <div className="casino">
@@ -17,7 +25,10 @@ const GamesPage = () => {
                 </div>
               </div>
             </div>
-            <div className="logout ui left floated secondary button inverted">
+            <div
+              onClick={() => handleLogout()}
+              className="logout ui left floated secondary button inverted"
+            >
               <i className="left chevron icon"></i>Log Out
             </div>
           </div>
