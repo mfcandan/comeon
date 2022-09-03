@@ -57,6 +57,32 @@ export const useStore = create((set, get) => ({
       console.log("error", error);
     }
   },
+  fetchGames: async () => {
+    try {
+      const res = await fetch("http://localhost:3001/games", { method: "get" });
+      const data = await res.json();
+      if (res.status === 200) {
+        set(() => ({
+          games: data,
+        }));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  },
+  fetchCategories: async () => {
+    try {
+      const res = await fetch("http://localhost:3001/categories", { method: "get" });
+      const data = await res.json();
+      if (res.status === 200) {
+        set(() => ({
+          categories: data,
+        }));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  },
   setUser: (user) => {
     set(() => ({
       user,

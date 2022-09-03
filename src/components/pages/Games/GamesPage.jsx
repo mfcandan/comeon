@@ -1,9 +1,16 @@
 import "./gamesPage.scss";
 import { useStore } from "../../../store/store";
 import { useEffect } from "react";
+import GameItem from "../../molecules/GameItem/GameItem";
+import CategoryItem from "../../molecules/CategoryItem/CategoryItem";
 
 const GamesPage = () => {
-  const { user, logout } = useStore();
+  const { user, logout, fetchGames, games, fetchCategories, categories } =
+    useStore();
+
+  useEffect(() => {
+    user && fetchGames() && fetchCategories();
+  }, [user]);
 
   const handleLogout = () => {
     logout(user.username);
@@ -43,33 +50,17 @@ const GamesPage = () => {
           <div className="twelve wide column">
             <h3 className="ui dividing header">Games</h3>
             <div className="ui relaxed divided game items links">
-              <div className="game item">
-                <div className="ui small image">
-                  <img src="" alt="game-icon" />
-                </div>
-                <div className="content">
-                  <div className="header">
-                    <b className="name"></b>
-                  </div>
-                  <div className="description"></div>
-                  <div className="extra">
-                    <div className="play ui right floated secondary button inverted">
-                      Play
-                      <i className="right chevron icon"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {games &&
+                games.map((game) => <GameItem key={game.name} game={game} />)}
             </div>
           </div>
           <div className="four wide column">
             <h3 className="ui dividing header">Categories</h3>
             <div className="ui selection animated list category items">
-              <div className="category item">
-                <div className="content">
-                  <div className="header"></div>
-                </div>
-              </div>
+              {categories &&
+                categories.map((category) => (
+                  <CategoryItem key={category.id} category={category} />
+                ))}
             </div>
           </div>
         </div>
