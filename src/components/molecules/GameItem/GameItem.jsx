@@ -1,4 +1,12 @@
+import { useStore } from "../../../store/store";
+
 const GameItem = ({ game }) => {
+  const { setSelectedGame } = useStore();
+
+  const handleClick = () => {
+    setSelectedGame(game);
+  };
+
   return (
     <div className="game item">
       <div className="ui small image">
@@ -10,7 +18,10 @@ const GameItem = ({ game }) => {
         </div>
         <div className="description">{game.description}</div>
         <div className="extra">
-          <div className="play ui right floated secondary button inverted">
+          <div
+            onClick={() => handleClick()}
+            className="play ui right floated secondary button inverted"
+          >
             Play
             <i className="right chevron icon"></i>
           </div>

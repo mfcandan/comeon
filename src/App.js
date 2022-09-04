@@ -3,9 +3,10 @@ import LoginPage from "./components/pages/Login/LoginPage";
 import GamesPage from "./components/pages/Games/GamesPage";
 import { useEffect } from "react";
 import { useStore } from "../src/store/store";
+import IngamePage from "./components/pages/IngamePage/IngamePage";
 
 function App() {
-  const { user, setUser } = useStore();
+  const { user, setUser, selectedGame } = useStore();
 
   useEffect(() => {
     localStorage.getItem("user") &&
@@ -14,7 +15,9 @@ function App() {
 
   return (
     <>
-      <MainLayout>{user ? <GamesPage /> : <LoginPage />}</MainLayout>
+      <MainLayout>
+        {user ? !selectedGame ? <GamesPage /> : <IngamePage /> : <LoginPage />}
+      </MainLayout>
     </>
   );
 }

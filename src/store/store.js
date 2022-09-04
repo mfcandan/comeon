@@ -8,6 +8,7 @@ export const useStore = create((set, get) => ({
   games: [],
   searchQuery: "",
   selectedCategory: 0,
+  selectedGame: "",
 
   // actions
   login: async (user, pass) => {
@@ -100,6 +101,11 @@ export const useStore = create((set, get) => ({
   setSelectedCategory: (selectedCategory) => {
     set(() => ({
       selectedCategory,
+    }));
+  },
+  setSelectedGame: (selectedGame) => {
+    set(() => ({
+      selectedGame,
     }));
   },
 }));
