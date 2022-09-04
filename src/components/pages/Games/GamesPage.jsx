@@ -1,18 +1,41 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStore } from "../../../store/store";
-import GameItem from "../../molecules/GameItem/GameItem";
+import SearchInput from "../../atoms/SearchInput/SearchInput";
 import PlayerItem from "../../molecules/PlayerItem/PlayerItem";
 import CategoryList from "../../organisms/CategoryList/CategoryList";
 import GameList from "../../organisms/GameList/GameList";
 import "./gamesPage.scss";
 
 const GamesPage = () => {
-  const { user, logout, fetchGames, games, fetchCategories, categories } =
-    useStore();
+  const {
+    user,
+    logout,
+    fetchGames,
+    games,
+    fetchCategories,
+    categories,
+    searchQuery,
+  } = useStore();
+  const [filteredGames, setFilteredGames] = useState();
 
   useEffect(() => {
     user && fetchGames() && fetchCategories();
   }, [user]);
+
+  useEffect(() => {
+    setFilteredGames(games);
+  }, [games]);
+
+  useEffect(() => {
+    if (searchQuery.length > 1) {
+      const tempGameList = filteredGames.filter((game) =>
+        game.name.toLowerCase().includes(searchQuery)
+      );
+      setFilteredGames(tempGameList);
+    } else {
+      setFilteredGames(games);
+    }
+  }, [searchQuery]);
 
   const handleLogout = () => {
     logout(user.username);
@@ -34,14 +57,11 @@ const GamesPage = () => {
             </div>
           </div>
           <div className="four wide column">
-            <div className="search ui small icon input">
-              <input type="text" placeholder="Search Game" />
-              <i className="search icon"></i>
-            </div>
+            <SearchInput />
           </div>
         </div>
         <div className="ui grid">
-          <GameList games={games} />
+          <GameList games={filteredGames} />
           <CategoryList categories={categories} />
         </div>
       </div>

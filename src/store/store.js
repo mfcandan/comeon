@@ -6,6 +6,7 @@ export const useStore = create((set, get) => ({
   searchQuery: "",
   categories: [],
   games: [],
+  searchQuery: "",
 
   // actions
   login: async (user, pass) => {
@@ -72,7 +73,9 @@ export const useStore = create((set, get) => ({
   },
   fetchCategories: async () => {
     try {
-      const res = await fetch("http://localhost:3001/categories", { method: "get" });
+      const res = await fetch("http://localhost:3001/categories", {
+        method: "get",
+      });
       const data = await res.json();
       if (res.status === 200) {
         set(() => ({
@@ -86,6 +89,11 @@ export const useStore = create((set, get) => ({
   setUser: (user) => {
     set(() => ({
       user,
+    }));
+  },
+  setSearchQuery: (value) => {
+    set(() => ({
+      searchQuery: value,
     }));
   },
 }));
