@@ -1,7 +1,7 @@
 import { useStore } from "../../../store/store";
 
 const CategoryItem = ({ category }) => {
-  const { setSelectedCategory } = useStore();
+  const { selectedCategory, setSelectedCategory } = useStore();
 
   const handleClick = () => {
     setSelectedCategory(category.id);
@@ -11,7 +11,14 @@ const CategoryItem = ({ category }) => {
     <>
       <div className="category item" onClick={() => handleClick()}>
         <div className="content">
-          <div className="header">{category.name}</div>
+          <div
+            style={{
+              color: category.id === selectedCategory ? "green" : "black",
+            }}
+            className="header"
+          >
+            {category.name}
+          </div>
         </div>
       </div>
     </>

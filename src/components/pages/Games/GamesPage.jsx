@@ -17,6 +17,7 @@ const GamesPage = () => {
     searchQuery,
     setSearchQuery,
     selectedCategory,
+    setSelectedCategory,
   } = useStore();
   const [filteredGames, setFilteredGames] = useState();
 
@@ -30,24 +31,29 @@ const GamesPage = () => {
 
   useEffect(() => {
     if (searchQuery) {
-      const tempGameList = filteredGames.filter((game) =>
+      const tempGames = selectedCategory === 0 ? games : filteredGames;
+      const tempGameList = tempGames.filter((game) =>
         game.name.toLowerCase().includes(searchQuery)
       );
       setFilteredGames(tempGameList);
     } else {
-      selectedCategory === 0 && setFilteredGames(games);
+      selectedCategory === 0 ? setFilteredGames(games) : filterCategory();
     }
   }, [searchQuery]);
 
   useEffect(() => {
-    if (games !== null) {
-      const tempGameList = games.filter((game) =>
-        game.categoryIds.includes(selectedCategory)
-      );
-      setFilteredGames(tempGameList);
-      setSearchQuery("");
+    if (games) {
+      filterCategory();
     }
   }, [selectedCategory]);
+
+  const filterCategory = () => {
+    const tempGameList = games.filter((game) =>
+      game.categoryIds.includes(selectedCategory)
+    );
+    setFilteredGames(tempGameList);
+    setSearchQuery("");
+  };
 
   const handleLogout = () => {
     logout(user.username);
