@@ -15,6 +15,8 @@ const GamesPage = () => {
     fetchCategories,
     categories,
     searchQuery,
+    setSearchQuery,
+    selectedCategory,
   } = useStore();
   const [filteredGames, setFilteredGames] = useState();
 
@@ -27,15 +29,25 @@ const GamesPage = () => {
   }, [games]);
 
   useEffect(() => {
-    if (searchQuery.length > 1) {
+    if (searchQuery) {
       const tempGameList = filteredGames.filter((game) =>
         game.name.toLowerCase().includes(searchQuery)
       );
       setFilteredGames(tempGameList);
     } else {
-      setFilteredGames(games);
+      selectedCategory === 0 && setFilteredGames(games);
     }
   }, [searchQuery]);
+
+  useEffect(() => {
+    if (games !== null) {
+      const tempGameList = games.filter((game) =>
+        game.categoryIds.includes(selectedCategory)
+      );
+      setFilteredGames(tempGameList);
+      setSearchQuery("");
+    }
+  }, [selectedCategory]);
 
   const handleLogout = () => {
     logout(user.username);
