@@ -1,14 +1,14 @@
 ## Game Webapp
 
-##Built React with semanticUI.
+Built React with semanticUI.
 
-##Atomic Design Pattern used for components.
+Atomic Design Pattern used for components.
 
-##This project contains Prettier & Eslint configs.
+This project contains Prettier & Eslint configs.
 
-##Login/Logout with localdb
+Login/Logout with localdb
 
-##Global state management with Zustand
+Global state management with Zustand
 
 ### `npm install` && `npm start` => App runs on http://localhost:3000
 ### `npm install -g json-server`
