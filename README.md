@@ -1,6 +1,7 @@
 ## Game Webapp
 
--Built React with semanticUI. 
+-Built React with semanticUI.
+-Atomic Design Pattern used for components.
 -This project contains Prettier & Eslint configs.
 -Login/Logout with localdb
 -Global state management with Zustand
